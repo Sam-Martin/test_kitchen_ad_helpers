@@ -1,19 +1,29 @@
 
 # Find the domain controller IP courtesy of kitchen-nodes
-domain_controller_ip = search(:node, 'run_list:*test_kitchen_ad_helpers??server*')[0]['ipaddress']
+search_query = 'run_list:*test_kitchen_ad_helpers??server*'
+domain_controller_ip = search('node', search_query)[0]['ipaddress']
 
 # Set the DNS client
 powershell_script 'Set DNS client server to Domain Controller' do
-	code <<-EOH
-$InterfaceIndex = (Get-NetIPAddress | ?{$_.IPAddress -like ('#{domain_controller_ip}' -replace '\\.\\d{1,3}$','*')}).InterfaceIndex;
-Set-DnsClientServerAddress -ServerAddresses #{domain_controller_ip} -InterfaceIndex $InterfaceIndex
+  code <<-EOH
+
+# Find the right interface to set the DNS client server entry for our DC
+$SubnetSearch = '#{domain_controller_ip}' -replace '\\.\\d{1,3}$','*'
+$Interface = (Get-NetIPAddress | ?{$_.IPAddress -like $SubnetSearch})
+
+$params = @{
+  $InterfaceIndex = $Interface.InterfaceIndex
+  ServerAddresses = #{domain_controller_ip}
+}
+Set-DnsClientServerAddress @params
+
 EOH
 end
 
 # Join Contoso.com domain
-windows_ad_domain "contoso.test" do
+windows_ad_domain 'contoso.test' do
   action :join
-  domain_pass "vagrant"
-  domain_user "vagrant"
+  domain_pass 'vagrant'
+  domain_user 'vagrant'
   restart true
 end
