@@ -7,13 +7,12 @@ domain_controller_ip = search('node', search_query)[0]['ipaddress']
 powershell_script 'Set DNS client server to Domain Controller' do
   code <<-EOH
 
-# Find the right interface to set the DNS client server entry for our DC
 $SubnetSearch = '#{domain_controller_ip}' -replace '\\.\\d{1,3}$','*'
 $Interface = (Get-NetIPAddress | ?{$_.IPAddress -like $SubnetSearch})
 
 $params = @{
-  $InterfaceIndex = $Interface.InterfaceIndex
-  ServerAddresses = #{domain_controller_ip}
+  InterfaceIndex = $Interface.InterfaceIndex
+  ServerAddresses = "#{domain_controller_ip}"
 }
 Set-DnsClientServerAddress @params
 
