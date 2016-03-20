@@ -2,3 +2,4 @@
 test/integration/nodes
 Berksfile.lock
 Gemfile.lock
+tmp/
