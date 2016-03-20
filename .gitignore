@@ -1,0 +1,3 @@
+.kitchen/
+test/integration/nodes
+Berksfile.lock
