@@ -1,0 +1,11 @@
+# Test data
+test/*
+.kitchen.yml
+Rakefile
+.rubocop.yml
+Gemfile
+Berksfile
+Berksfile.lock
+
+# GIT
+.git/*
