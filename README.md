@@ -1,4 +1,4 @@
-# test_kitchen_ad_helpers
+# test_kitchen_ad_helpers [![Build Status](https://travis-ci.org/Sam-Martin/test_kitchen_ad_helpers.svg?branch=master)](https://travis-ci.org/Sam-Martin/test_kitchen_ad_helpers)
 A cookbook helper with a kitchen example for multi-node AD integration testing for Test Kitchen.  
 This example creates two instances:  
 
