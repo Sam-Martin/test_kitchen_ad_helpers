@@ -10,9 +10,10 @@ You want to test a cookbook/PowerShell script/etc using test-kitchen, but it req
 
 # Setup  
 Copy the following files from this repository into your cookbook's repo (merging files as necessary):  
-1. `kitchen.yml`
-2. `test/*`
-3. `Berksfile`  
+
+1. `kitchen.yml`  
+2. `test/*`  
+3. `Berksfile`   
 
 Add `test_kitchen_ad_helpers` to the `Berksfile`
 
