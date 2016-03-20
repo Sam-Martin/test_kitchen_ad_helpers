@@ -1,0 +1,27 @@
+---
+driver:
+  name: vagrant
+
+provisioner:
+  name: nodes
+
+platforms:
+  - name: windows-domaincontroller
+    driver_config:
+      box: mwrock/Windows2012R2
+      network:
+            - ["private_network", {type: "dhcp"}]
+      customize:
+        usb: 'off'
+    run_list:
+        - test_kitchen_ad_helpers::server
+  - name: windows-2012r2
+    driver_config:
+      box: mwrock/Windows2012R2
+      network:
+            - ["private_network", {type: "dhcp"}]
+    run_list:
+        - test_kitchen_ad_helpers::client
+
+suites:
+  - name: default

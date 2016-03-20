@@ -1,0 +1,6 @@
+# Test data
+test/*
+.kitchen.yml
+
+# GIT
+.git/*
