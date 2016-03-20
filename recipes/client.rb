@@ -20,9 +20,10 @@ EOH
 end
 
 # Join Contoso.com domain
-windows_ad_domain 'contoso.test' do
+windows_ad_computer ENV['COMPUTERNAME'] do
   action :join
   domain_pass 'vagrant'
   domain_user 'vagrant'
+  domain_name 'contoso.test'
   restart true
 end
